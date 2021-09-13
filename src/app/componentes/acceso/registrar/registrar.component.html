@@ -1,0 +1,55 @@
+<form #frmRegistro="ngForm" class="form-enable">
+  <div class="card">
+    <div class="card-header">
+      <h3><strong>Registrar nuevo usuario</strong></h3>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <label>Nombre:</label>
+        <input
+          appOnFocusInit
+          name="inp_nombre"
+          class="form-control"
+          type="text"
+          [(ngModel)]="usuario.nombres"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label>correo:</label>
+        <input
+        name="inp_correo"
+          class="form-control"
+          type="text"
+          [(ngModel)]="usuario.correo"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label>Nueva Contraseña:</label>
+        <input
+        name="inp_contrasena"
+          class="form-control"
+          type="password"
+          [(ngModel)]="usuario.contrasena"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label>Confirmar Contraseña:</label>
+        <input
+          name="inp_correo_confirmar"
+          class="form-control"
+          type="text"
+          [(ngModel)]="contrasena_confirmar"
+          required
+          (keypress)="keyPress($event)"
+        />
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-success" (click)="registrarUsuario()" [disabled] = "frmRegistro.invalid" >Registrar</button>
+      <button class="btn btn-success" (click)="limpiarCampos()">Limpiar</button>
+    </div>
+  </div>
+</form>
