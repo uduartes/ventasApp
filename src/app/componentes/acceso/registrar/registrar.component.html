@@ -18,7 +18,7 @@
       <div class="form-group">
         <label>correo:</label>
         <input
-        name="inp_correo"
+          name="inp_correo"
           class="form-control"
           type="text"
           [(ngModel)]="usuario.correo"
@@ -28,7 +28,7 @@
       <div class="form-group">
         <label>Nueva Contraseña:</label>
         <input
-        name="inp_contrasena"
+          name="inp_contrasena"
           class="form-control"
           type="password"
           [(ngModel)]="usuario.contrasena"
@@ -40,15 +40,59 @@
         <input
           name="inp_correo_confirmar"
           class="form-control"
-          type="text"
+          type="password"
           [(ngModel)]="contrasena_confirmar"
           required
           (keypress)="keyPress($event)"
         />
       </div>
+
+      <div class="form-group">
+        <label>Rol:</label>
+
+        <div class="row">
+          <div class="col-6">
+            <select
+              name="inp_correo_confirmar"
+              class="form-control"
+              [(ngModel)]="rol_seleccionado"
+              (change)="addRol()"
+            >
+              <option *ngFor="let rol of roles" [ngValue]="rol">
+                {{ rol.nombre }}
+              </option>
+            </select>
+          </div>
+          <div class="col-6">
+            <table class="table">
+              <thead>
+                <th>Rol Seleccionado</th>
+                <th></th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let rol of roles_seleccionados; let i = index">
+                  <td>{{ i }} {{ rol.nombre }}</td>
+                  <td class="text-center">
+                    <button class="btn btn-danger" (click)="removeRol(rol)">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+  
+          </div>
+        </div>
+      </div>
     </div>
     <div class="card-footer">
-      <button class="btn btn-success" (click)="registrarUsuario()" [disabled] = "frmRegistro.invalid  || passwordDif()" >Registrar</button>
+      <button
+        class="btn btn-success"
+        (click)="registrarUsuario(frmRegistro)"
+        [disabled]="frmRegistro.invalid || passwordDif()"
+      >
+        Registrar
+      </button>
       <button class="btn btn-success" (click)="limpiarCampos()">Limpiar</button>
     </div>
   </div>

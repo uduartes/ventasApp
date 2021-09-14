@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Producto } from 'src/app/interfaces/producto';
 
 @Component({
   selector: 'app-listar-productos',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListarProductosComponent implements OnInit {
 
-  constructor() { }
+producto:Producto
+
+  constructor() { 
+   this.inicializarVariables();
+  }
 
   ngOnInit(): void {
+  }
+
+  inicializarVariables(){
+    this.producto = {};
+
   }
 
 }

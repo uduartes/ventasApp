@@ -1,1 +1,41 @@
-<p>login works!</p>
+<form #frmLogin="ngForm">
+  <div class="d-flex justufy-content-center">
+    <div class="card">
+      <div class="card-header">
+        <h3><strong>Inicio de Sesion</strong></h3>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label>correo:</label>
+          <input
+            name="inp_correo"
+            class="form-control"
+            type="text"
+            [(ngModel)]="usuario.correo"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>Contraseña:</label>
+          <input
+            name="inp_contrasena"
+            class="form-control"
+            type="password"
+            [(ngModel)]="usuario.contrasena"
+            required
+          />
+        </div>
+      </div>
+      <div class="card-footer">
+        <button
+          class="btn btn-success"
+          (click)="login(frmLogin)"
+          [disabled]="frmLogin.invalid"
+        >
+          Registrar
+        </button>
+      
+      </div>
+    </div>
+  </div>
+</form>
