@@ -18,16 +18,20 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  login(frmRegistro: NgForm) {
-    if (frmRegistro.valid) {
+  login(frmLogin: NgForm) {
+    if (frmLogin.valid) {
       this.usuarioService.acceder(this.usuario).subscribe((usuarios) => {
-        if(usuarios.length > 0){
-          
+        //si el arreglo de usuarios es mayor a 0
+        //almacenar al usuario de la posicion 0 en el localStorage
+        if (usuarios.length > 0) {
+          window.localStorage.setItem(
+            'VENTAS_APP_USER',
+            JSON.stringify(usuarios[0])
+          );
         }
-        console.log('Se encontro al usuario',usuarios);
       });
     } else {
-      alert('Ingresa los datos');
+      alert('Llene todos los campos de acceso');
     }
   }
 

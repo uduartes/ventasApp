@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/interfaces/producto';
 import { NgForm } from '@angular/forms';
+import { ProductoService } from 'src/app/servicios/producto/producto.service';
 
 @Component({
   selector: 'app-agregar-productos',
@@ -9,20 +10,29 @@ import { NgForm } from '@angular/forms';
 })
 export class AgregarProductosComponent implements OnInit {
   producto: Producto;
-
-  constructor() {
+  constructor(private productoService: ProductoService) {
     this.inicializarVariables();
   }
 
-  ngOnInit(): void {
-
+  registrarProducto(frmRegistro: NgForm) {
+    if (frmRegistro.valid) {
+      this.productoService
+        .agregarProducto(this.producto)
+        .then(() => {
+          alert('Producto agregado correctamente');
+        })
+        .catch((error) => {
+          alert('Error al agregar un producto: ' + error);
+        });
+    } else {
+      alert('Formulario invalido! revise los campos obligatorios');
+    }
   }
 
+  ngOnInit(): void {}
+
+  limpiarCampos() {}
   inicializarVariables() {
     this.producto = {};
-  }
-
-  registrarProducto(frmRegistro: NgForm){
-
   }
 }

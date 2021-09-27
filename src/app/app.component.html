@@ -1,8 +1,41 @@
-<!--<app-registrar></app-registrar>-->
-<h1>Sistema de Venta de productos</h1>
-<div class="d-flex flex-row-reverse">
-  <div class="p-2"><button class="btn btn-primary" [routerLink]= "['/login']">Iniciar Sesion</button></div>
-  <div class="p-2"><button class="btn btn-secundary" [routerLink]= "['/registrar']">Registrar</button></div>
-  
+<div class="card">
+  <div class="card-header">
+    <div class="d-flex justify-content-center">
+      <h1>Sistema de venta de productos</h1>
+    </div>
+    <div *ngIf="usuario && usuario.usuario_id" class="d-flex flex-row-reverse">
+      <button class="btn btn-danger" [routerLink]="['/']">Cerrar Sesión</button>
+    </div>
+    <div
+       *ngIf="!(usuario && usuario.usuario_id)"
+      class="d-flex flex-row-reverse"
+    >
+      <div class="p-2">
+        <button class="btn btn-primary" [routerLink]="['/login']">
+          Logear
+        </button>
+      </div>
+      <div class="p-2">
+        <button class="btn btn-secondary" [routerLink]="['/registrar/']">
+          Registrar 
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-<router-outlet></router-outlet>
+
+
+
+<app-agregar-venta></app-agregar-venta>
+
+<br/>
+<app-listar-ventas></app-listar-ventas>
+
+
+<br/>
+<br/>
+<br/>
+<app-agregar-productos></app-agregar-productos>

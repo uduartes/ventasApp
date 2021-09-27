@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Usuario } from 'src/app/interfaces/usuario';
@@ -8,14 +9,20 @@ import { Usuario } from 'src/app/interfaces/usuario';
 export class UsuarioService {
   collection_usuario: string = 'usuario';
   collection_rol: string = 'Roles';
-  constructor(private asf: AngularFirestore) {}
+  constructor(
+    private asf: AngularFirestore,
+    private httpClient:HttpClient
+  ) {}
 
   acceder(usuario: Usuario) {
-    return this.asf.collection(this.collection_usuario, (ref) =>
-      ref
-        .where('correo', '==', usuario.correo)
-        .where('contrasena', '==', usuario.contrasena)
-    ).valueChanges();
+    return this.asf
+      .collection(this.collection_usuario, (ref) =>
+        ref
+          .where('correo', '==', usuario.correo)
+          .where('contrasena', '==', usuario.contrasena)
+          .limit(1)
+      )
+      .valueChanges();
   }
 
   listarRoles() {
@@ -39,5 +46,10 @@ export class UsuarioService {
     let fecha_actual_ms = new Date().getTime().toString();
     let letra_nombres = usuario.nombres.substr(0, 3);
     return fecha_actual_ms + letra_nombres;
+  }
+
+  url: string = 'https://gorest.co.in/public/v1/users';
+  listarUsuariosRest() {
+    return this.httpClient.get(this.url);
   }
 }

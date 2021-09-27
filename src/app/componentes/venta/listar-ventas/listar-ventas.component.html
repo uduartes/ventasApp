@@ -1,1 +1,41 @@
-<p>listar-ventas works!</p>
+<div class="card-body">
+  <div class="row">
+    <div class="col-8">
+      <div>
+        <div class="container-fluid">
+          <div class="tableContent">
+            <table class="table table-striped table-hover no-wrap">
+              <thead>
+                <th class="text-center">ID Venta</th>
+                <th>Total $</th>
+                <th class="text-center">Venderor ID</th>
+                <th class="text-center"># Productos</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let venta of lista_ventas; let i = index" data-toggle="collapse" [attr.data-target]="'#accordion' + i"  class="clickable"> 
+                  <td>{{ venta.venta_id  }}</td>
+                  
+                  <td class="text-center">{{ venta.total  }}</td>
+                  <td class="text-center">
+                    {{ venta.usuario_id }}
+                  </td>
+                  <td class="text-center">
+                    {{ venta.detalles.length }}
+                    <div *ngFor="let det of venta.detalles">
+                        {{ det.cantidad }}
+                        {{ det.descripcion }}
+                        {{i}}
+                    </div>
+                    <div id="accordion{{i}}" class="collapse">Hidden by default</div>
+                  </td>
+                </tr>
+               
+              </tbody>
+            </table>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
